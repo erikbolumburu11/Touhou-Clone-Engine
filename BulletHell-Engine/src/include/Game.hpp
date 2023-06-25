@@ -27,8 +27,10 @@ public:
 	sf::RenderWindow& GetWindow()			{ return window;				}
 	sf::RenderTexture& GetRenderTexture()	{ return renderTexture;			}
 	sf::RenderTarget* GetRenderTarget()		{ return renderTarget;			}
+	sf::View& GetView()						{ return view;					}
 	sf::Event& GetEvent()					{ return event;					}
 	bool& IsRunning()						{ return isRunning;				}
+	bool& IsGamePaused()					{ return gamePaused;			}
 	Entity& GetEntityCount()				{ return entityCount;			}
 	Registry& GetRegistry()					{ return registry;				}
 	sf::Time& GetDeltaTime()				{ return deltaTime;				}
@@ -42,12 +44,15 @@ private:
 	sf::RenderTexture renderTexture;
 	sf::RenderWindow window;
 
+	sf::View view;
+
 	sf::Clock deltaClock;
 	sf::Time deltaTime;
 
 	EditorHandler editorHandler;
 
 	bool isRunning = true;
+	bool gamePaused = false;
 	sf::Event event;
 
 	Entity entityCount = 0;

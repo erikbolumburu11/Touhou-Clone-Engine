@@ -9,10 +9,10 @@ public:
 	EditorHandler();
 	void Update(float delta, Game& game);
 
-	void MainMenuBar();
+	void MainMenuBar(Game& game);
 	void OpenHandler();
 	void CloseHandler();
 
 	std::vector<EditorBase*> editors;
-	uint16_t mainDockID;
+	uint32_t mainDockID = 0;
 };

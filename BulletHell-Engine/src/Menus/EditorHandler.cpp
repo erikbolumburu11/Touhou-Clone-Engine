@@ -11,7 +11,7 @@ EditorHandler::EditorHandler()
 
 void EditorHandler::Update(float delta, Game& game)
 {
-	MainMenuBar();
+	MainMenuBar(game);
 	OpenHandler();
 
 	for (EditorBase* e : editors) {
@@ -61,7 +61,7 @@ void EditorHandler::CloseHandler()
 	ImGui::End();
 }
 
-void EditorHandler::MainMenuBar()
+void EditorHandler::MainMenuBar(Game& game)
 {
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("File")) {
@@ -77,6 +77,18 @@ void EditorHandler::MainMenuBar()
 
 			ImGui::EndMenu();
 		}
+
+		if (game.IsGamePaused()) {
+			if (ImGui::Button("Game Paused")) {
+				game.IsGamePaused() = !game.IsGamePaused();
+			}
+		}
+		if (!game.IsGamePaused()) {
+			if (ImGui::Button("Game Running")) {
+				game.IsGamePaused() = !game.IsGamePaused();
+			}
+		}
+
 
 		ImGui::EndMainMenuBar();
 	}

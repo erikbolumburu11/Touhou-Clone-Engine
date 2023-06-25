@@ -9,6 +9,8 @@ public:
 
 		if (ImGui::Begin("Viewport")){
 			ImVec2 contentSize = ImGui::GetContentRegionAvail();
+			game.GetView().setSize({contentSize.x, contentSize.y});
+			game.GetRenderTexture().setView(game.GetView());
 
 			ImGui::Image(game.GetRenderTexture(), contentSize);
 		}
