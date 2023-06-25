@@ -25,34 +25,19 @@
     <Filter Include="Source Files\Systems">
       <UniqueIdentifier>{bb7d6f0f-c82e-4207-8538-11a5e6ec47db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Menus">
+    <Filter Include="Header Files\Editor Menus">
       <UniqueIdentifier>{45acfeae-3957-49fb-980a-6e39dece991f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor Menus">
+      <UniqueIdentifier>{42d4062c-10cf-4299-a936-37b4a24f6d5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ImGui\imgui.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImGui\imgui_draw.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImGui\imgui_tables.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImGui\imgui_widgets.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImGui\imgui-SFML.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-1.89.6\imgui_demo.cpp">
-      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Systems\SpriteSystem.cpp">
       <Filter>Source Files\Systems</Filter>
@@ -62,6 +47,27 @@
     </ClCompile>
     <ClCompile Include="src\Systems\PlayerMovementSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menus\EditorHandler.cpp">
+      <Filter>Source Files\Editor Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_demo.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_draw.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_tables.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_widgets.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-sfml-master\imgui-SFML.cpp">
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +90,16 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\include\Menus\EntityEditor.hpp">
-      <Filter>Header Files\Menus</Filter>
+      <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\EditorBase.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\EditorHandler.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\ViewportEditor.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

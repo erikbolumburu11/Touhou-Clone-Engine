@@ -1,12 +1,20 @@
 #pragma once
 #include <imgui.h>
 #include <imgui-SFML.h>
+#include <Menus/EditorBase.hpp>
 #include "Game.hpp"
 
-void EntityEditorMenu(Game& game) {
-	ImGui::Begin("Entity Editor");
+class EntityEditor : public EditorBase {
 
-	ImGui::Text("Enteioanta");
+	virtual void Update(float dt, Game& game) override {
+		ImGui::Begin("Entity Editor");
 
-	ImGui::End();
-}
+		ImGui::Text("Entity Editor");
+
+		ImGui::End();
+	}
+
+	const char* GetName() {
+		return "Entity Editor";
+	}
+};

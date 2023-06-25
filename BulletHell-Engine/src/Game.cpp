@@ -3,10 +3,16 @@
 #include "Game.hpp"
 #include <Menus/EntityEditor.hpp>
 
-Game::Game(std::size_t _windowWidth, std::size_t _windowHeight) : windowWidth(_windowWidth), windowHeight(_windowHeight), event(sf::Event())
-{
+Game::Game(std::size_t _windowWidth, std::size_t _windowHeight) : windowWidth(_windowWidth), windowHeight(_windowHeight), event(sf::Event()) {
 	window.create(sf::VideoMode(_windowWidth, _windowHeight), "Bullet Hell Engine");
+	if (renderTexture.create(_windowWidth, _windowHeight)) {
+		std::cout << "ERROR CREATING RENDER TEXTURE!\n";
+	}
+	renderTarget = &window;
+
+	editorHandler = EditorHandler();
 	ImGui::SFML::Init(window);
+	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 }
 
 Game::~Game()
@@ -24,7 +30,10 @@ void Game::Run()
 				IsRunning() = false;
 			}
 		}
-
+		
+#if (EDIT_MODE)
+		GetRenderTexture().clear();
+#endif
 		GetWindow().clear();
 		
 		Update();
@@ -47,13 +56,22 @@ void Game::Update()
 
 void Game::Render()
 {
+#if (EDIT_MODE)
+	renderTarget = &renderTexture;
+#endif
+#if (!EDIT_MODE)
+	renderTarget = &window;
+#endif
+
 	for (Entity entity = 1; entity <= GetEntityCount(); entity++) {
 		spriteSystem.Render(entity, *this, registry);
 	}
 
+#if (EDIT_MODE)
 	ImGui::SFML::Update(window, GetDeltaTime());
-	EntityEditorMenu(*this);
+	GetEditorHandler().Update(GetDeltaTime().asSeconds(), *this);
 	ImGui::SFML::Render(window);
+#endif
 }
 
 Entity Game::CreateEntity()

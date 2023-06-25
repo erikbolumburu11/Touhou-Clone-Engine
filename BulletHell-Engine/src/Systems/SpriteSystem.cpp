@@ -13,6 +13,6 @@ void SpriteSystem::Render(Entity& e, Game& g, Registry& reg)
 		sf::CircleShape shape(reg.transforms[e].scale.x);
 		shape.setPosition(reg.transforms[e].position);
 		shape.setFillColor(sf::Color::White);
-		g.GetWindow().draw(shape);
+		g.GetRenderTarget()->draw(shape);
 	}
 }
