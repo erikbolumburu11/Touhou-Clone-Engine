@@ -32,6 +32,9 @@ struct BulletEmitterComponent {
 	sf::Clock timeSinceShot;
 	int bulletsFired;			// Fire X bullets every shot
 	float fireRate;				// Fire every X seconds
+
+	float rotationSpeed;
+	float currentRotationRadians;
 };
 
 struct BulletComponent {

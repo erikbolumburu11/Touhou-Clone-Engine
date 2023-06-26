@@ -18,7 +18,7 @@ using Entity = std::size_t;
 
 class Game {
 public:
-	Game(std::size_t _windowWidth, std::size_t _windowHeight);
+	Game(unsigned int _windowWidth, unsigned int _windowHeight);
 	~Game();
 
 	void Run();
@@ -26,19 +26,22 @@ public:
 	void Render();
 
 	Entity CreateEntity();
+	void DestroyEntity(Entity e);
+	void IncEntityCount();
 
-	sf::RenderWindow& GetWindow()			{ return window;				}
-	sf::RenderTexture& GetRenderTexture()	{ return renderTexture;			}
-	sf::RenderTarget* GetRenderTarget()		{ return renderTarget;			}
-	sf::View& GetView()						{ return view;					}
-	sf::Event& GetEvent()					{ return event;					}
-	bool& IsRunning()						{ return isRunning;				}
-	bool& IsGamePaused()					{ return gamePaused;			}
-	Entity& GetEntityCount()				{ return entityCount;			}
-	Registry& GetRegistry()					{ return registry;				}
-	sf::Time& GetDeltaTime()				{ return deltaTime;				}
-	EditorHandler& GetEditorHandler()		{ return editorHandler;			}
-	BulletHandler& GetBulletHandler()		{ return bulletHandler;			}
+	sf::RenderWindow& GetWindow()			{ return window;					}
+	sf::RenderTexture& GetRenderTexture()	{ return renderTexture;				}
+	sf::RenderTarget* GetRenderTarget()		{ return renderTarget;				}
+	sf::View& GetView()						{ return view;						}
+	sf::Event& GetEvent()					{ return event;						}
+	bool& IsRunning()						{ return isRunning;					}
+	bool& IsGamePaused()					{ return gamePaused;				}
+	Entity GetEntityCount()					{ return entityCount;				}
+	Entity GetMenuEntityCount()				{ return menuEntityCount;			}
+	Registry& GetRegistry()					{ return registry;					}
+	sf::Time& GetDeltaTime()				{ return deltaTime;					}
+	EditorHandler& GetEditorHandler()		{ return editorHandler;				}
+	BulletHandler& GetBulletHandler()		{ return bulletHandler;				}
 
 private:
 	std::size_t windowWidth;
@@ -62,6 +65,7 @@ private:
 	sf::Event event;
 
 	Entity entityCount = 0;
+	Entity menuEntityCount = 0;
 
 	Registry registry; // Stores entity, component maps.
 

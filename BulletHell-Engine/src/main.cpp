@@ -19,12 +19,13 @@ int main() {
 		STRAIGHT_SHOT,
 		sf::Clock(),
 		3,
-		1
+		1,
+		0,
+		0
 	};
 	reg.transforms[emitter] = TransformComponent{ {0, -150 }, {20, 20} };
 	reg.sprites[emitter] = SpriteComponent{ sf::Color::White, RECTANGLE};
 	reg.names[emitter] = NameComponent{ "Test Emitter 1" };
-
 
 	game.Run();
 

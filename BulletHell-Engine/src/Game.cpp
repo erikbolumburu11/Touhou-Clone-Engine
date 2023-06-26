@@ -3,11 +3,11 @@
 #include "Game.hpp"
 #include <Menus/EntityEditor.hpp>
 
-Game::Game(std::size_t _windowWidth, std::size_t _windowHeight) 
+Game::Game(unsigned int _windowWidth, unsigned int _windowHeight) 
 	: windowWidth(_windowWidth), windowHeight(_windowHeight), event(sf::Event()) {
 
-	window.create(sf::VideoMode(_windowWidth, _windowHeight), "Bullet Hell Engine");
-	if (!renderTexture.create(_windowWidth, _windowHeight)) {
+	window.create(sf::VideoMode({ _windowWidth, _windowHeight }, (unsigned int)32), "Bullet Hell Engine");
+	if (!renderTexture.create({ _windowWidth, _windowHeight })) {
 		std::cout << "ERROR CREATING RENDER TEXTURE!\n";
 	}
 	renderTarget = &window;
@@ -77,7 +77,7 @@ void Game::Update()
 		transformSystem.Update(entity, deltaTime.asSeconds(), registry);
 		playerMovementSystem.Update(entity, registry);
 		bulletEmitterSystem.Update(entity, *this);
-		bulletSystem.Update(entity, registry);
+		bulletSystem.Update(entity, *this);
 	}
 }
 
@@ -102,9 +102,27 @@ void Game::Render()
 	#endif
 }
 
+void Game::IncEntityCount()
+{
+	entityCount++;
+}
+
 Entity Game::CreateEntity()
 {
-	static Entity entities = 0;
-	GetEntityCount() = entities + 1;
-	return entities++;
+	menuEntityCount++;
+	IncEntityCount();
+	return GetEntityCount() - 1;
 }
+
+void Game::DestroyEntity(Entity e)
+{
+	registry.sprites.erase(e);
+	registry.transforms.erase(e);
+	registry.names.erase(e);
+	registry.velocities.erase(e);
+	registry.playerMovements.erase(e);
+	registry.bulletEmitters.erase(e);
+	registry.bullets.erase(e);
+	menuEntityCount -= 1;
+}
+

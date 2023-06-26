@@ -46,7 +46,7 @@ class BulletEditor : public EditorBase {
 					ImGui::InputFloat("Speed", &bh.bullets[bulletEditIndex].states[i].speed);
 					ImGui::ColorEdit4("Color", (float*)&bh.bullets[bulletEditIndex].states[i].color);
 					ImGui::DragFloat("Scale", &bh.bullets[bulletEditIndex].states[i].scale.x, 0.2f, 1, 100);
-					ImGui::DragFloat("Angular Velocity", &bh.bullets[bulletEditIndex].states[i].angularVelocity, 0.01f, -100, 100);
+					ImGui::DragFloat("Angular Velocity", &bh.bullets[bulletEditIndex].states[i].angularVelocity, 0.001f, -2, 2);
 				}
 			}
 		}

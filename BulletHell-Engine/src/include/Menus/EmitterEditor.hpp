@@ -83,6 +83,7 @@ public:
 
 			// SET FIRE RATE
 			ImGui::InputFloat("Fire Rate", &reg.bulletEmitters[selectedEmitterIndex].fireRate);
+			ImGui::DragFloat("Rotation Speed", &reg.bulletEmitters[selectedEmitterIndex].rotationSpeed, 0.01, -3, 3);
 
 			// SET FIRE TYPE
 			if (ImGui::BeginCombo("Select Fire Type", magic_enum::enum_name(reg.bulletEmitters[selectedEmitterIndex].fireType).data())) {
@@ -99,7 +100,6 @@ public:
 				};
 				ImGui::EndCombo();
 			}
-
 		}
 
 		ImGui::End();

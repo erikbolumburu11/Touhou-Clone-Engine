@@ -1,20 +1,27 @@
-#include "Systems/BulletSystem.hpp"
 #include <iostream>
+#include <Game.hpp>
+#include "Systems/BulletSystem.hpp"
 
-void BulletSystem::Update(Entity& e, Registry& reg)
+void BulletSystem::Update(Entity& e, Game& game)
 {
-	// Calculate Angular Velocity
+	Registry& reg = game.GetRegistry();
 	if (reg.bullets.contains(e)) {
-		BulletComponent& bc = reg.bullets[e];
-		BulletState& bs = bc.bullet.states[reg.bullets[e].bullet.currentState];
-		float angle = atan2f(bc.angle.x, bc.angle.y);
-		float newAngle = angle + bs.angularVelocity;
-		sf::Vector2f newAngleVec = {
-			cos(newAngle),
-			sin(newAngle)
-		};
-		bc.angle = newAngleVec;
-		reg.velocities[e].velocity += newAngleVec * bs.speed;
-		float x = 10;
+		// Calculate Angular Velocity
+		float av = reg.bullets[e].bullet.states[reg.bullets[e].bullet.currentState].angularVelocity;
+		reg.velocities[e].velocity = reg.velocities[e].velocity.rotatedBy(sf::radians(av * game.GetDeltaTime().asSeconds()));
+
+		//Check If Off Screen
+		sf::View v = game.GetRenderTarget()->getView();
+		sf::FloatRect cullRect = sf::FloatRect(
+			sf::Vector2f(v.getCenter().x - v.getSize().x / 2, v.getCenter().y - v.getSize().y / 2),
+			v.getSize()
+		);
+
+		TransformComponent tc = reg.transforms[e];
+		sf::FloatRect bounds(tc.position, tc.scale);
+
+		if (!(bool)bounds.findIntersection(cullRect)) {
+			game.DestroyEntity(e);
+		}
 	}
 }

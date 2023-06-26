@@ -71,13 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML\bin;C:\Users\erikf\dev\LIBRARIES\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML3\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML3\build\bin;C:\Users\erikf\dev\LIBRARIES\SFML3\build\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\ImGui;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML\bin;C:\Users\erikf\dev\LIBRARIES\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML3\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML3\build\bin;C:\Users\erikf\dev\LIBRARIES\SFML3\build\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\ImGui;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
