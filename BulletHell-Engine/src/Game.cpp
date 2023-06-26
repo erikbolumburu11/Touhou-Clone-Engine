@@ -17,10 +17,11 @@ Game::Game(std::size_t _windowWidth, std::size_t _windowHeight)
 		{(float)_windowWidth, (float)_windowHeight}
 	));
 
-	editorHandler = EditorHandler();
+	GetEditorHandler() = EditorHandler();
+
 	ImGui::SFML::Init(window);
 	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-
+	
 	#if (EDIT_MODE)
 	IsGamePaused() = true;
 	#endif
@@ -54,7 +55,6 @@ void Game::Run()
 		}
 
 		GetWindow().setView(view);
-		GetWindow().setView(view);
 
 		deltaTime = deltaClock.restart();
 
@@ -72,11 +72,12 @@ void Game::Run()
 
 void Game::Update()
 {
-
-	for (Entity entity = 1; entity <= GetEntityCount(); entity++) {
+	for (Entity entity = 0; entity < GetEntityCount(); entity++) {
 		spriteSystem.Update(entity, *this, registry);
 		transformSystem.Update(entity, deltaTime.asSeconds(), registry);
 		playerMovementSystem.Update(entity, registry);
+		bulletEmitterSystem.Update(entity, *this);
+		bulletSystem.Update(entity, registry);
 	}
 }
 
@@ -90,13 +91,13 @@ void Game::Render()
 	renderTarget = &window;
 	#endif
 
-	for (Entity entity = 1; entity <= GetEntityCount(); entity++) {
+	for (Entity entity = 0; entity < GetEntityCount(); entity++) {
 		spriteSystem.Render(entity, *this, registry);
 	}
 
 	#if (EDIT_MODE)
 	ImGui::SFML::Update(window, GetDeltaTime());
-	GetEditorHandler().Update(GetDeltaTime().asSeconds(), *this);
+	GetEditorHandler().Update(*this);
 	ImGui::SFML::Render(window);
 	#endif
 }
@@ -104,7 +105,6 @@ void Game::Render()
 Entity Game::CreateEntity()
 {
 	static Entity entities = 0;
-	++entities;
-	GetEntityCount() = entities;
-	return entities;
+	GetEntityCount() = entities + 1;
+	return entities++;
 }

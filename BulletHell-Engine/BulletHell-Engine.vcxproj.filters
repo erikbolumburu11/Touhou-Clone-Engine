@@ -69,6 +69,18 @@
     <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-sfml-master\imgui-SFML.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Systems\BulletEmitterSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BulletHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\BulletSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\Game.hpp">
@@ -100,6 +112,27 @@
     </ClInclude>
     <ClInclude Include="src\include\Menus\ViewportEditor.hpp">
       <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\EmitterEditor.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\BulletEditor.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\BulletData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\BulletHandler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Systems\BulletEmitterSystem.hpp">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Components\FireTypes.hpp">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Systems\BulletSystem.hpp">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

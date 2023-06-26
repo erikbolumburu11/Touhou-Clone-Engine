@@ -1,8 +1,16 @@
 #pragma once 
 #include <SFML/Graphics.hpp>
+#include <BulletData.hpp>
+#include "FireTypes.hpp"
+
+enum SpriteShapes {
+	CIRCLE,
+	RECTANGLE
+};
 
 struct SpriteComponent {
-	std::shared_ptr<sf::Texture> texture;
+	sf::Color color;
+	SpriteShapes shape;
 };
 
 struct VelocityComponent {
@@ -16,4 +24,21 @@ struct TransformComponent {
 
 struct PlayerMovementComponent {
 	float movementSpeed;
+};
+
+struct BulletEmitterComponent {
+	uint32_t bulletDataIndex;			// Bullet To be shot
+	FireTypes fireType;
+	sf::Clock timeSinceShot;
+	int bulletsFired;			// Fire X bullets every shot
+	float fireRate;				// Fire every X seconds
+};
+
+struct BulletComponent {
+	BulletData bullet;
+	sf::Vector2f angle;
+};
+
+struct NameComponent {
+	std::string name;
 };

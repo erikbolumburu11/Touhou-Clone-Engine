@@ -1,5 +1,6 @@
 #pragma once
 #include <Menus/EditorBase.hpp>
+#include <Components/Registry.hpp>
 #include <vector>
 
 class Game;
@@ -7,7 +8,7 @@ class Game;
 class EditorHandler {
 public:
 	EditorHandler();
-	void Update(float delta, Game& game);
+	void Update(Game& game);
 
 	void MainMenuBar(Game& game);
 	void OpenHandler();

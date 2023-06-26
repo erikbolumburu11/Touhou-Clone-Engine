@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML\bin;C:\Users\erikf\dev\LIBRARIES\SFML\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\ImGui;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\include;C:\Users\erikf\dev\LIBRARIES\imgui-sfml-master;C:\Users\erikf\dev\LIBRARIES\imgui-1.89.6\imgui-docking;C:\Users\erikf\dev\LIBRARIES\SFML\include;C:\Users\erikf\dev\LIBRARIES\magic_enum-0.9.3\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Users\erikf\dev\LIBRARIES\SFML\bin;C:\Users\erikf\dev\LIBRARIES\SFML\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src\ImGui;C:\Users\erikf\source\repos\BulletHell-Engine\BulletHell-Engine\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -146,22 +146,33 @@
     <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_draw.cpp" />
     <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_tables.cpp" />
     <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-1.89.6\imgui-docking\misc\cpp\imgui_stdlib.cpp" />
     <ClCompile Include="..\..\..\..\dev\LIBRARIES\imgui-sfml-master\imgui-SFML.cpp" />
+    <ClCompile Include="src\BulletHandler.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menus\EditorHandler.cpp" />
+    <ClCompile Include="src\Systems\BulletEmitterSystem.cpp" />
+    <ClCompile Include="src\Systems\BulletSystem.cpp" />
     <ClCompile Include="src\Systems\PlayerMovementSystem.cpp" />
     <ClCompile Include="src\Systems\SpriteSystem.cpp" />
     <ClCompile Include="src\Systems\TransformSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\include\BulletData.hpp" />
+    <ClInclude Include="src\include\BulletHandler.hpp" />
+    <ClInclude Include="src\include\Components\FireTypes.hpp" />
     <ClInclude Include="src\include\Components\Components.hpp" />
     <ClInclude Include="src\include\Components\Registry.hpp" />
     <ClInclude Include="src\include\Game.hpp" />
+    <ClInclude Include="src\include\Menus\BulletEditor.hpp" />
     <ClInclude Include="src\include\Menus\EditorBase.hpp" />
     <ClInclude Include="src\include\Menus\EditorHandler.hpp" />
+    <ClInclude Include="src\include\Menus\EmitterEditor.hpp" />
     <ClInclude Include="src\include\Menus\EntityEditor.hpp" />
     <ClInclude Include="src\include\Menus\ViewportEditor.hpp" />
+    <ClInclude Include="src\include\Systems\BulletEmitterSystem.hpp" />
+    <ClInclude Include="src\include\Systems\BulletSystem.hpp" />
     <ClInclude Include="src\include\Systems\PlayerMovementSystem.hpp" />
     <ClInclude Include="src\include\Systems\SpriteSystem.hpp" />
     <ClInclude Include="src\include\Systems\TransformSystem.hpp" />

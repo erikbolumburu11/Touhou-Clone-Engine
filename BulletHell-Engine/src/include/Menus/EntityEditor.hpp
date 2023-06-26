@@ -6,7 +6,7 @@
 
 class EntityEditor : public EditorBase {
 
-	virtual void Update(float dt, Game& game) override {
+	virtual void Update(Game& game) override {
 		ImGui::Begin("Entity Editor");
 
 		ImGui::Text("Entity Editor");

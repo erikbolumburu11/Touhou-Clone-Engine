@@ -1,10 +1,11 @@
+#pragma once
 #include <imgui.h>
 #include "Menus/EditorBase.hpp"
 #include <Game.hpp>
 
 class ViewportEditor : public EditorBase {
 public:
-	virtual void Update(float delta, Game& game) override {
+	virtual void Update(Game& game) override {
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 
 		if (ImGui::Begin("Viewport")){

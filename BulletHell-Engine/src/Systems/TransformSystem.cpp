@@ -1,4 +1,3 @@
-#pragma once
 #include "Systems/TransformSystem.hpp"
 
 class Game;

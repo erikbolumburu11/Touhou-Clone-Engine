@@ -7,5 +7,5 @@ public:
 	EditorBase() = default;
 
 	virtual const char* GetName() = 0;
-	virtual void Update(float dt, Game& game) {};
+	virtual void Update(Game& game) {};
 };

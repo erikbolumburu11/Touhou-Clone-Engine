@@ -1,21 +1,25 @@
 #include "Menus/EditorHandler.hpp"
 #include "Menus/EntityEditor.hpp"
+#include "Menus/BulletEditor.hpp"
+#include "Menus/EmitterEditor.hpp"
 #include "Menus/ViewportEditor.hpp"
 #include <Game.hpp>
 
 EditorHandler::EditorHandler()
 {
 	editors.push_back(new EntityEditor());
+	editors.push_back(new EmitterEditor());
 	editors.push_back(new ViewportEditor());
+	editors.push_back(new BulletEditor());
 }
 
-void EditorHandler::Update(float delta, Game& game)
+void EditorHandler::Update(Game& game)
 {
 	MainMenuBar(game);
 	OpenHandler();
 
 	for (EditorBase* e : editors) {
-		e->Update(delta, game);
+		e->Update(game);
 	}
 
 	CloseHandler();
@@ -40,7 +44,6 @@ void EditorHandler::OpenHandler()
 	ImGuiDockNodeFlags dockFlags{
 		ImGuiDockNodeFlags_None
 	};
-
 	const ImGuiViewport* imGuiViewport = ImGui::GetMainViewport();
 	ImGui::SetNextWindowPos(imGuiViewport->WorkPos);
 	ImGui::SetNextWindowSize(imGuiViewport->WorkSize);
@@ -52,7 +55,7 @@ void EditorHandler::OpenHandler()
 
 	ImGui::Begin("SFML Window", nullptr, windowFlags);
 	ImGui::PopStyleVar(3);
-	mainDockID = ImGui::GetID("Main"); // IF PROBLEM CHECK HERE. WHAT IS MAIN?
+	mainDockID = ImGui::GetID("Main"); 
 	ImGui::DockSpace(mainDockID, ImVec2(0.0f, 0.0f), dockFlags);
 }
 
@@ -88,7 +91,11 @@ void EditorHandler::MainMenuBar(Game& game)
 				game.IsGamePaused() = !game.IsGamePaused();
 			}
 		}
+		std::string entityCount = "Entity Count: " + std::to_string(game.GetEntityCount());
+		ImGui::Text(entityCount.c_str());
 
+		std::string fps = "FPS: " + std::to_string(1.0f / game.GetDeltaTime().asSeconds());
+		ImGui::Text(fps.c_str());
 
 		ImGui::EndMainMenuBar();
 	}

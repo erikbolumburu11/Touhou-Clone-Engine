@@ -9,7 +9,10 @@
 #include "Systems/SpriteSystem.hpp"
 #include "Systems/TransformSystem.hpp"
 #include "Systems/PlayerMovementSystem.hpp"
+#include "Systems/BulletEmitterSystem.hpp"
+#include "Systems/BulletSystem.hpp"
 #include "Menus/EditorHandler.hpp"
+#include "BulletHandler.hpp"
 
 using Entity = std::size_t;
 
@@ -35,6 +38,7 @@ public:
 	Registry& GetRegistry()					{ return registry;				}
 	sf::Time& GetDeltaTime()				{ return deltaTime;				}
 	EditorHandler& GetEditorHandler()		{ return editorHandler;			}
+	BulletHandler& GetBulletHandler()		{ return bulletHandler;			}
 
 private:
 	std::size_t windowWidth;
@@ -51,6 +55,8 @@ private:
 
 	EditorHandler editorHandler;
 
+	BulletHandler bulletHandler;
+
 	bool isRunning = true;
 	bool gamePaused = false;
 	sf::Event event;
@@ -62,4 +68,6 @@ private:
 	SpriteSystem spriteSystem;
 	TransformSystem transformSystem;
 	PlayerMovementSystem playerMovementSystem;
+	BulletEmitterSystem bulletEmitterSystem;
+	BulletSystem bulletSystem;
 };
