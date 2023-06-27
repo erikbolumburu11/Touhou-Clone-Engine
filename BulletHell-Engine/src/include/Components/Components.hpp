@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <BulletData.hpp>
 #include "FireTypes.hpp"
+#include <Attack.hpp>
 
 enum SpriteShapes {
 	CIRCLE,
@@ -28,14 +29,12 @@ struct PlayerMovementComponent {
 };
 
 struct BulletEmitterComponent {
-	uint32_t bulletDataIndex;			// Bullet To be shot
-	FireTypes fireType;
-	sf::Clock timeSinceShot;
-	int bulletsFired;			// Fire X bullets every shot
-	float fireRate;				// Fire every X seconds
+	int currentState = 0;
+	std::vector<AttackState> states;
 
-	float rotationSpeed;
-	float currentRotationRadians;
+	BulletEmitterComponent(){
+		states.push_back(AttackState());
+	}
 };
 
 struct BulletComponent {

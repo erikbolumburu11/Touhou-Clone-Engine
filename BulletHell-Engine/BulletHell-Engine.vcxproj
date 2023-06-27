@@ -159,6 +159,7 @@
     <ClCompile Include="src\Systems\TransformSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\include\Attack.hpp" />
     <ClInclude Include="src\include\BulletData.hpp" />
     <ClInclude Include="src\include\BulletHandler.hpp" />
     <ClInclude Include="src\include\Components\FireTypes.hpp" />

@@ -14,16 +14,7 @@ int main() {
 	
 	// Create Test Emitter
 	entt::entity emitter = reg.create();
-	reg.emplace<BulletEmitterComponent>(
-		emitter,
-		(uint32_t)0,
-		STRAIGHT_SHOT,
-		sf::Clock(),
-		(int)3,
-		(float)1,
-		(float)0,
-		(float)0
-	);
+	reg.emplace<BulletEmitterComponent>(emitter);
 	reg.emplace<TransformComponent>(emitter, sf::Vector2f(0, -150), sf::Vector2f(20, 20) );
 	reg.emplace<SpriteComponent>(emitter, sf::Color::White, RECTANGLE);
 	reg.emplace<NameComponent>(emitter, "Test Emitter 1");

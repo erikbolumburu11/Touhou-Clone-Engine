@@ -1,7 +1,7 @@
 #include "BulletHandler.hpp"
 #include "Game.hpp"
 
-entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, sf::Vector2f direction)
+entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPattern& ap, sf::Vector2f direction)
 {
 	entt::registry& reg = game.GetRegistry();
 	entt::entity e = reg.create();
@@ -11,7 +11,7 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, sf::Vecto
 
 	reg.emplace<BulletComponent>( 
 		e,
-		game.GetBulletHandler().bullets[bec.bulletDataIndex],
+		game.GetBulletHandler().bullets[ap.bulletDataIndex],
 		direction
 	);
 

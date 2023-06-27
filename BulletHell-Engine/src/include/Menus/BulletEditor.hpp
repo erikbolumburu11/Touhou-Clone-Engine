@@ -42,11 +42,12 @@ class BulletEditor : public EditorBase {
 			for (uint32_t i = 0; i < bh.bullets[bulletEditIndex].states.size(); i++)
 			{
 				std::string label = "State " + std::to_string(i);
-				if (ImGui::CollapsingHeader(label.c_str())) {
+				if (ImGui::TreeNode(label.c_str())) {
 					ImGui::InputFloat("Speed", &bh.bullets[bulletEditIndex].states[i].speed);
 					ImGui::ColorEdit4("Color", (float*)&bh.bullets[bulletEditIndex].states[i].color);
 					ImGui::DragFloat("Scale", &bh.bullets[bulletEditIndex].states[i].scale.x, 0.2f, 1, 100);
 					ImGui::DragFloat("Angular Velocity", &bh.bullets[bulletEditIndex].states[i].angularVelocity, 0.001f, -2, 2);
+					ImGui::TreePop();
 				}
 			}
 		}

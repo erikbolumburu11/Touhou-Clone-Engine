@@ -131,5 +131,8 @@
     <ClInclude Include="src\include\Systems\BulletSystem.hpp">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\include\Attack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
