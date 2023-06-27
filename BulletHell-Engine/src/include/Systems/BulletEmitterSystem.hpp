@@ -1,11 +1,12 @@
 #pragma once
-#include "Components/Registry.hpp"
+#include <entt/entt.hpp>
+#include <Components/Components.hpp>
 
 class Game;
 
 struct BulletEmitterSystem {
-	void Update(Entity& e, Game& game);
-	void StraightShot(Entity& e, Game& game);
-	void RadialShot(Entity& e, Game& game, BulletEmitterComponent be);
-	void ConeShot(Entity& e, Game& game, BulletEmitterComponent be);
+	void Update(Game& game);
+	void StraightShot(Game& game, const entt::registry& reg, const BulletEmitterComponent& bec);
+	void RadialShot(Game& game, entt::registry& reg, BulletEmitterComponent& bec);
+	void ConeShot(Game& game, entt::registry& reg, BulletEmitterComponent& bec);
 };

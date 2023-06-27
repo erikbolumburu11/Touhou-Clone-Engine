@@ -1,6 +1,5 @@
 #pragma once
 #include <Menus/EditorBase.hpp>
-#include <Components/Registry.hpp>
 #include <vector>
 
 class Game;

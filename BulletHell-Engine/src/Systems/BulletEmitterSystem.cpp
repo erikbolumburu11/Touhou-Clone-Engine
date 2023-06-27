@@ -5,63 +5,63 @@
 #include <Game.hpp>
 
 
-void BulletEmitterSystem::Update(Entity& e, Game& game)
+void BulletEmitterSystem::Update(Game& game)
 {
-	Registry& reg = game.GetRegistry();
-	if (reg.bulletEmitters.contains(e)) {
-		reg.bulletEmitters[e].currentRotationRadians += reg.bulletEmitters[e].rotationSpeed * game.GetDeltaTime().asSeconds();
-		BulletEmitterComponent& be = reg.bulletEmitters[e];
-		if (be.timeSinceShot.getElapsedTime().asSeconds() >= be.fireRate) {
-			be.timeSinceShot.restart();
-			switch (reg.bulletEmitters[e].fireType) {
+	entt::registry& reg = game.GetRegistry();
+	auto view = reg.view<BulletEmitterComponent, TransformComponent>();
+	view.each([&](auto& bec, auto& tc) {
+		bec.currentRotationRadians += bec.rotationSpeed * game.GetDeltaTime().asSeconds();
+		if (bec.timeSinceShot.getElapsedTime().asSeconds() >= bec.fireRate) {
+			bec.timeSinceShot.restart();
+			switch (bec.fireType) {
 			case STRAIGHT_SHOT:
-				StraightShot(e, game);
+				StraightShot(game, reg, bec);
 				break;
 			case RADIAL_SHOT:
-				RadialShot(e, game, be);
+				RadialShot(game, reg, bec);
 				break;
 			case CONE_SHOT:
 				std::cout << "Cone Shot Fired\n";
 				break;
 			}
 		}
-	}
+	});
 }
 
-void BulletEmitterSystem::StraightShot(Entity& e, Game& game)
+void BulletEmitterSystem::StraightShot(Game& game, const entt::registry& reg, const BulletEmitterComponent& bec)
 {
-	Registry& reg = game.GetRegistry();
-	sf::Vector2f dir(cos(reg.bulletEmitters[e].currentRotationRadians), sin(reg.bulletEmitters[e].currentRotationRadians));
-	Entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
+	sf::Vector2f dir(cos(bec.currentRotationRadians), sin(bec.currentRotationRadians));
+	entt::entity e = entt::to_entity(reg, bec);
+	entt::entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
 }
 
-void BulletEmitterSystem::RadialShot(Entity& e, Game& game, BulletEmitterComponent be)
+void BulletEmitterSystem::RadialShot(Game& game, entt::registry& reg, BulletEmitterComponent& bec)
 {
-	Registry& reg = game.GetRegistry();
-	for (uint16_t i = 0; i < be.bulletsFired; i++)
+	for (uint16_t i = 0; i < bec.bulletsFired; i++)
 	{
-		float step = 2 * M_PI / be.bulletsFired;
-		for (uint32_t i = 0; i < be.bulletsFired; i++)
+		float step = 2 * M_PI / bec.bulletsFired;
+		for (uint32_t i = 0; i < bec.bulletsFired; i++)
 		{
 			sf::Vector2f dir(cos((step * i)), sin(step * i));
 			dir = dir.normalized();
-			dir = dir.rotatedBy(sf::radians(be.currentRotationRadians));
-			Entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
+			dir = dir.rotatedBy(sf::radians(bec.currentRotationRadians));
+			entt::entity e = entt::to_entity(reg, bec);
+			entt::entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
 		}
 	}
 }
 
-void BulletEmitterSystem::ConeShot(Entity& e, Game& game, BulletEmitterComponent be)
+void BulletEmitterSystem::ConeShot(Game& game, entt::registry& reg, BulletEmitterComponent& bec)
 {
-	Registry& reg = game.GetRegistry();
-	for (uint16_t i = 0; i < be.bulletsFired; i++)
+	for (uint16_t i = 0; i < bec.bulletsFired; i++)
 	{
-		float step = 2 * M_PI / be.bulletsFired;
-		for (uint32_t i = 0; i < be.bulletsFired; i++)
+		float step = 2 * M_PI / bec.bulletsFired;
+		for (uint32_t i = 0; i < bec.bulletsFired; i++)
 		{
-			sf::Vector2f dir(cos((step * i) + be.currentRotationRadians), sin(step * i) + be.currentRotationRadians);
+			sf::Vector2f dir(cos((step * i) + bec.currentRotationRadians), sin(step * i) + bec.currentRotationRadians);
 			dir = dir.normalized();
-			Entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
+			entt::entity e = entt::to_entity(reg, bec);
+			entt::entity b = game.GetBulletHandler().CreateBullet(game, e, dir);
 		}
 	}
 }

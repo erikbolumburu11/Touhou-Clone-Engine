@@ -1,24 +1,36 @@
 #include "BulletHandler.hpp"
 #include "Game.hpp"
 
-Entity BulletHandler::CreateBullet(Game& game, Entity& be, sf::Vector2f direction)
+entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, sf::Vector2f direction)
 {
-	Entity e = game.CreateEntity();
-	game.GetRegistry().bullets[e] = BulletComponent {
-		game.GetBulletHandler().bullets[game.GetRegistry().bulletEmitters[be].bulletDataIndex],
+	entt::registry& reg = game.GetRegistry();
+	entt::entity e = reg.create();
+
+	BulletEmitterComponent bec = reg.get<BulletEmitterComponent>(be);
+	TransformComponent bet = reg.get<TransformComponent>(be);
+
+	reg.emplace<BulletComponent>( 
+		e,
+		game.GetBulletHandler().bullets[bec.bulletDataIndex],
 		direction
-	};
-	game.GetRegistry().sprites[e] = SpriteComponent {
-		game.GetRegistry().bullets[e].bullet.states[0].color,
+	);
+
+	BulletComponent bc = reg.get<BulletComponent>(e);
+
+	reg.emplace<SpriteComponent>(
+		e,
+		bc.bullet.states[0].color,
 		CIRCLE
-	};
-	game.GetRegistry().transforms[e] = TransformComponent{
-		game.GetRegistry().transforms[be].position - (game.GetRegistry().bullets[e].bullet.states[0].scale - (game.GetRegistry().transforms[be].scale / 2.f)),
-		game.GetRegistry().bullets[e].bullet.states[0].scale,
-	};
-	game.GetRegistry().velocities[e] = VelocityComponent {
-		direction * game.GetRegistry().bullets[e].bullet.states[0].speed
-	};
+	);
+	reg.emplace<TransformComponent>(
+		e,
+		bet.position - (bc.bullet.states[0].scale - (bet.scale / 2.f)),
+		bc.bullet.states[0].scale
+	);
+	reg.emplace<VelocityComponent>(
+		e,
+		direction * bc.bullet.states[0].speed
+	);
 
 	return e;
 }

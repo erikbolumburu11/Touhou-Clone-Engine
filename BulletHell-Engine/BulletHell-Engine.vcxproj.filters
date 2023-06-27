@@ -86,9 +86,6 @@
     <ClInclude Include="src\include\Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\Components\Registry.hpp">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\include\Systems\SpriteSystem.hpp">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>

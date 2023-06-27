@@ -91,7 +91,7 @@ void EditorHandler::MainMenuBar(Game& game)
 				game.IsGamePaused() = !game.IsGamePaused();
 			}
 		}
-		std::string entityCount = "Entity Count: " + std::to_string(game.GetMenuEntityCount());
+		std::string entityCount = "Entity Count: " + std::to_string(game.GetRegistry().storage<entt::entity>().size());
 		ImGui::Text(entityCount.c_str());
 
 		std::string fps = "FPS: " + std::to_string(1.0f / game.GetDeltaTime().asSeconds());

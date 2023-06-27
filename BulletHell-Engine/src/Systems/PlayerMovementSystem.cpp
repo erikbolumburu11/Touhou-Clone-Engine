@@ -1,13 +1,17 @@
 #include "Systems/PlayerMovementSystem.hpp"
+#include <Components/components.hpp>
 
-void PlayerMovementSystem::Update(Entity& e, Registry& reg)
+void PlayerMovementSystem::Update(entt::registry& reg)
 {
-	if (reg.playerMovements.contains(e) && reg.velocities.contains(e)) {
-		float speed = reg.playerMovements[e].movementSpeed;
-		reg.velocities[e].velocity = { 0, 0 };
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) reg.velocities[e].velocity.y += speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) reg.velocities[e].velocity.y -= speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) reg.velocities[e].velocity.x += speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) reg.velocities[e].velocity.x -= speed;
-	}
+	auto view = reg.view<PlayerMovementComponent, VelocityComponent>();
+	view.each([&](auto& pmc, auto& vc) {
+		float speed;
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) speed = pmc.movementSpeed;
+		else speed = pmc.shiftMovementSpeed;
+		vc.velocity = { 0, 0 };
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) vc.velocity.y += speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) vc.velocity.y -= speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) vc.velocity.x += speed;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) vc.velocity.x -= speed;
+	});
 }

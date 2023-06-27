@@ -24,6 +24,7 @@ struct TransformComponent {
 
 struct PlayerMovementComponent {
 	float movementSpeed;
+	float shiftMovementSpeed;
 };
 
 struct BulletEmitterComponent {

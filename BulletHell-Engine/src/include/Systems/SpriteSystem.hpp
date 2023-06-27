@@ -1,11 +1,11 @@
 #pragma once 
 #include <iostream>
 #include <unordered_map>
-#include "Components/Registry.hpp"
+#include <entt/entt.hpp>
 
 class Game;
 
 struct SpriteSystem {
-	void Update(Entity& e, Game& g, Registry& reg);
-	void Render(Entity& e, Game& g, Registry& reg);
+	void Update(Game& g, entt::registry& reg);
+	void Render(Game& g, entt::registry& reg);
 };

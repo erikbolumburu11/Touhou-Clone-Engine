@@ -1,10 +1,11 @@
+#include <Components/Components.hpp>
+#include <Game.hpp>
 #include "Systems/TransformSystem.hpp"
 
-class Game;
-
-void TransformSystem::Update(Entity& e, float dt, Registry& reg)
+void TransformSystem::Update(Game& game, entt::registry& reg)
 {
-	if (reg.transforms.contains(e) && reg.velocities.contains(e)) {
-		reg.transforms[e].position += reg.velocities[e].velocity * dt;
-	}
+	auto view = reg.view<TransformComponent, VelocityComponent>();
+	view.each([&](auto& tc, auto& vc) {
+		tc.position += vc.velocity * game.GetDeltaTime().asSeconds();
+	});
 }

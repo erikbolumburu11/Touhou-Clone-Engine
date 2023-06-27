@@ -3,9 +3,9 @@
 #define EDIT_MODE true
 
 #include <cstddef>
+#include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <imgui-SFML.h>
-#include "Components/Registry.hpp"
 #include "Systems/SpriteSystem.hpp"
 #include "Systems/TransformSystem.hpp"
 #include "Systems/PlayerMovementSystem.hpp"
@@ -13,8 +13,6 @@
 #include "Systems/BulletSystem.hpp"
 #include "Menus/EditorHandler.hpp"
 #include "BulletHandler.hpp"
-
-using Entity = std::size_t;
 
 class Game {
 public:
@@ -25,10 +23,6 @@ public:
 	void Update();
 	void Render();
 
-	Entity CreateEntity();
-	void DestroyEntity(Entity e);
-	void IncEntityCount();
-
 	sf::RenderWindow& GetWindow()			{ return window;					}
 	sf::RenderTexture& GetRenderTexture()	{ return renderTexture;				}
 	sf::RenderTarget* GetRenderTarget()		{ return renderTarget;				}
@@ -36,9 +30,7 @@ public:
 	sf::Event& GetEvent()					{ return event;						}
 	bool& IsRunning()						{ return isRunning;					}
 	bool& IsGamePaused()					{ return gamePaused;				}
-	Entity GetEntityCount()					{ return entityCount;				}
-	Entity GetMenuEntityCount()				{ return menuEntityCount;			}
-	Registry& GetRegistry()					{ return registry;					}
+	entt::registry& GetRegistry()			{ return registry;					}
 	sf::Time& GetDeltaTime()				{ return deltaTime;					}
 	EditorHandler& GetEditorHandler()		{ return editorHandler;				}
 	BulletHandler& GetBulletHandler()		{ return bulletHandler;				}
@@ -64,10 +56,7 @@ private:
 	bool gamePaused = false;
 	sf::Event event;
 
-	Entity entityCount = 0;
-	Entity menuEntityCount = 0;
-
-	Registry registry; // Stores entity, component maps.
+	entt::registry registry;
 
 	SpriteSystem spriteSystem;
 	TransformSystem transformSystem;

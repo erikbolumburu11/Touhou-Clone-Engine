@@ -1,19 +1,20 @@
 #include "Systems/SpriteSystem.hpp"
 #include "Game.hpp"
 
-void SpriteSystem::Update(Entity& e, Game& g, Registry& reg) {}
+void SpriteSystem::Update(Game& g, entt::registry& reg) {}
 
-void SpriteSystem::Render(Entity& e, Game& g, Registry& reg)
+void SpriteSystem::Render(Game& g, entt::registry& reg)
 {
-	if (reg.sprites.contains(e) && reg.transforms.contains(e)) {
-		sf::CircleShape circle = sf::CircleShape(reg.transforms[e].scale.x);
-		circle.setPosition(reg.transforms[e].position);
-		circle.setFillColor(reg.sprites[e].color);
+	auto view = reg.view<SpriteComponent, TransformComponent>();
+	view.each([&](auto& sr, auto& t) {
+		sf::CircleShape circle = sf::CircleShape(t.scale.x);
+		circle.setPosition(t.position);
+		circle.setFillColor(sr.color);
 
-		sf::RectangleShape rectangle = sf::RectangleShape(reg.transforms[e].scale);
-		rectangle.setPosition(reg.transforms[e].position);
-		rectangle.setFillColor(reg.sprites[e].color);
-		switch (reg.sprites[e].shape) {
+		sf::RectangleShape rectangle = sf::RectangleShape(t.scale);
+		rectangle.setPosition(t.position);
+		rectangle.setFillColor(sr.color);
+		switch (sr.shape) {
 		case CIRCLE:
 			g.GetRenderTarget()->draw(circle);
 			break;
@@ -21,5 +22,5 @@ void SpriteSystem::Render(Entity& e, Game& g, Registry& reg)
 			g.GetRenderTarget()->draw(rectangle);
 			break;
 		}
-	}
+	});
 }

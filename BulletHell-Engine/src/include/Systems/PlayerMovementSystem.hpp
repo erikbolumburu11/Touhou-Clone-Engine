@@ -1,6 +1,6 @@
 #pragma once
-#include "Components/Registry.hpp"
+#include <entt/entt.hpp>
 
 struct PlayerMovementSystem {
-	void Update(Entity& e, Registry& reg);
+	void Update(entt::registry& reg);
 };

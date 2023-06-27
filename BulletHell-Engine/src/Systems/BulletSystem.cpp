@@ -2,13 +2,13 @@
 #include <Game.hpp>
 #include "Systems/BulletSystem.hpp"
 
-void BulletSystem::Update(Entity& e, Game& game)
+void BulletSystem::Update(Game& game)
 {
-	Registry& reg = game.GetRegistry();
-	if (reg.bullets.contains(e)) {
+	auto view = game.GetRegistry().view<BulletComponent, VelocityComponent, TransformComponent>();
+	view.each([&](auto& bc, auto& vc, auto& tc) {
 		// Calculate Angular Velocity
-		float av = reg.bullets[e].bullet.states[reg.bullets[e].bullet.currentState].angularVelocity;
-		reg.velocities[e].velocity = reg.velocities[e].velocity.rotatedBy(sf::radians(av * game.GetDeltaTime().asSeconds()));
+		float av = bc.bullet.states[bc.bullet.currentState].angularVelocity;
+		vc.velocity = vc.velocity.rotatedBy(sf::radians(av * game.GetDeltaTime().asSeconds()));
 
 		//Check If Off Screen
 		sf::View v = game.GetRenderTarget()->getView();
@@ -17,11 +17,11 @@ void BulletSystem::Update(Entity& e, Game& game)
 			v.getSize()
 		);
 
-		TransformComponent tc = reg.transforms[e];
 		sf::FloatRect bounds(tc.position, tc.scale);
 
 		if (!(bool)bounds.findIntersection(cullRect)) {
-			game.DestroyEntity(e);
+			entt::entity e = entt::to_entity(game.GetRegistry(), bc);
+			game.GetRegistry().destroy(e);
 		}
-	}
+	});
 }

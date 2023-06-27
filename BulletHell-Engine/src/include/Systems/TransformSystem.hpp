@@ -1,6 +1,7 @@
 #pragma once
-#include "Components/Registry.hpp"
+#include <entt/entt.hpp>
 
+class Game;
 struct TransformSystem {
-	void Update(Entity& e, float dt, Registry& reg);
+	void Update(Game& game, entt::registry& reg);
 };

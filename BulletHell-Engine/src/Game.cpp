@@ -72,13 +72,11 @@ void Game::Run()
 
 void Game::Update()
 {
-	for (Entity entity = 0; entity < GetEntityCount(); entity++) {
-		spriteSystem.Update(entity, *this, registry);
-		transformSystem.Update(entity, deltaTime.asSeconds(), registry);
-		playerMovementSystem.Update(entity, registry);
-		bulletEmitterSystem.Update(entity, *this);
-		bulletSystem.Update(entity, *this);
-	}
+	spriteSystem.Update(*this, registry);
+	transformSystem.Update(*this, registry);
+	playerMovementSystem.Update(registry);
+	bulletEmitterSystem.Update(*this);
+	bulletSystem.Update(*this);
 }
 
 void Game::Render()
@@ -91,9 +89,7 @@ void Game::Render()
 	renderTarget = &window;
 	#endif
 
-	for (Entity entity = 0; entity < GetEntityCount(); entity++) {
-		spriteSystem.Render(entity, *this, registry);
-	}
+	spriteSystem.Render(*this, registry);
 
 	#if (EDIT_MODE)
 	ImGui::SFML::Update(window, GetDeltaTime());
@@ -101,28 +97,3 @@ void Game::Render()
 	ImGui::SFML::Render(window);
 	#endif
 }
-
-void Game::IncEntityCount()
-{
-	entityCount++;
-}
-
-Entity Game::CreateEntity()
-{
-	menuEntityCount++;
-	IncEntityCount();
-	return GetEntityCount() - 1;
-}
-
-void Game::DestroyEntity(Entity e)
-{
-	registry.sprites.erase(e);
-	registry.transforms.erase(e);
-	registry.names.erase(e);
-	registry.velocities.erase(e);
-	registry.playerMovements.erase(e);
-	registry.bulletEmitters.erase(e);
-	registry.bullets.erase(e);
-	menuEntityCount -= 1;
-}
-

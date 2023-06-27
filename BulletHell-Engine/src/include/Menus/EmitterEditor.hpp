@@ -4,57 +4,46 @@
 #include <magic_enum_all.hpp>
 #include <Menus/EditorBase.hpp>
 #include "Game.hpp"
+#include "Components/Components.hpp"
 
 class EmitterEditor : public EditorBase {
 public:
 	std::string label;
-	std::vector<Entity> entities;
 	
 	virtual void Update(Game& game) override {
 		ImGui::Begin("Emitter Editor");
 
-		Registry& reg = game.GetRegistry();
-		static Entity selectedEmitterIndex = reg.bulletEmitters.begin()->first;{};
-		entities.clear();
+		entt::registry& reg = game.GetRegistry();
 
 		// SELECT EMITTER
-		if (reg.bulletEmitters.empty()) {
+		auto bes = reg.view<BulletEmitterComponent>();
+		auto emitters = reg.view<BulletEmitterComponent, NameComponent>();
+		static auto first = emitters.front();
+		static entt::entity selectedEmitter = first;
+		if (bes.empty()) {
 			ImGui::TextColored(ImVec4(sf::Color::Red), "No Emitters In Scene!");
 		}
 		else {
-			for (auto& bulletEmitter : reg.bulletEmitters) {
-				entities.push_back(bulletEmitter.first);
-				if (bulletEmitter.first == selectedEmitterIndex) {
-					Entity e = bulletEmitter.first;
-					BulletEmitterComponent& be = bulletEmitter.second;
-
-					selectedEmitterIndex = e;
-
-					if (reg.names.contains(e)) {
-						label = reg.names[e].name + "###init";
+			label = reg.get<NameComponent>(first).name + "###" + std::to_string((int)first);
+			if(ImGui::BeginCombo("###SelectEmitter", label.c_str())) {
+				emitters.each([&](auto& be, auto& nc) {
+					std::string name = nc.name + "###" + std::to_string((int)entt::to_entity(reg, nc));
+					bool isSelected = (&be == &reg.get<BulletEmitterComponent>(selectedEmitter));
+					if (ImGui::Selectable(name.c_str(), isSelected)) {
+						entt::entity e = entt::to_entity(reg, be);
+						selectedEmitter = e;
 					}
-				}
+				});
 			}
 
-			if (!entities.empty()) {
-				if (ImGui::BeginCombo("##label2", label.c_str())) {
-					for (Entity e = 0; e <= entities.size(); e++) {
-						if (reg.names.contains(e) && reg.bulletEmitters.contains(e)) {
-							std::string name = reg.names[e].name + "###" + std::to_string(e);
-							bool isSelected = (e == selectedEmitterIndex);
-							if (ImGui::Selectable(name.c_str(), isSelected)) {
-								selectedEmitterIndex = e;
-							}
-						}
-					}
-					ImGui::EndCombo();
-				}
-			}
-			std::string timeSinceShot = "Time Since Last Shot: " + std::to_string(reg.bulletEmitters[selectedEmitterIndex].timeSinceShot.getElapsedTime().asSeconds());
+			auto& sebec = reg.get<BulletEmitterComponent>(selectedEmitter);
+			auto& sen = reg.get<NameComponent>(selectedEmitter);
+
+			std::string timeSinceShot = "Time Since Last Shot: " + std::to_string(sebec.timeSinceShot.getElapsedTime().asSeconds());
 			ImGui::Text(timeSinceShot.c_str());
 
 			// CHANGE NAME
-			ImGui::InputText("Name", &reg.names[selectedEmitterIndex].name);
+			ImGui::InputText("Name", &sen.name);
 
 			static uint32_t bulletSelectIndex = 0;
 			BulletHandler& bh = game.GetBulletHandler();
@@ -68,7 +57,7 @@ public:
 						std::string label = bh.bullets[i].name + "###" + std::to_string(i); // Avoid label conflicts
 						if (ImGui::Selectable(label.c_str(), isSelected)) {
 							bulletSelectIndex = i;
-							reg.bulletEmitters[selectedEmitterIndex].bulletDataIndex = bulletSelectIndex;
+							sebec.bulletDataIndex = bulletSelectIndex;
 						}
 					}
 					ImGui::EndCombo();
@@ -79,28 +68,29 @@ public:
 			}
 
 			// SET AMOUNT OF BULLETS FIRED PER SHOT
-			ImGui::InputInt("Bullet Count", &reg.bulletEmitters[selectedEmitterIndex].bulletsFired);
+			ImGui::InputInt("Bullet Count", &sebec.bulletsFired);
 
 			// SET FIRE RATE
-			ImGui::InputFloat("Fire Rate", &reg.bulletEmitters[selectedEmitterIndex].fireRate);
-			ImGui::DragFloat("Rotation Speed", &reg.bulletEmitters[selectedEmitterIndex].rotationSpeed, 0.01, -3, 3);
+			ImGui::InputFloat("Fire Rate", &sebec.fireRate);
+			ImGui::DragFloat("Rotation Speed", &sebec.rotationSpeed, 0.01, -3, 3);
 
 			// SET FIRE TYPE
-			if (ImGui::BeginCombo("Select Fire Type", magic_enum::enum_name(reg.bulletEmitters[selectedEmitterIndex].fireType).data())) {
+			if (ImGui::BeginCombo("Select Fire Type", magic_enum::enum_name(sebec.fireType).data())) {
 				for (uint16_t i = 0; i < magic_enum::enum_count<FireTypes>(); i++)
 				{
 					std::string enumName = magic_enum::enum_name(magic_enum::enum_value<FireTypes>(i)).data();
 					uint16_t enumInt = magic_enum::enum_integer(magic_enum::enum_value<FireTypes>(i));
 
-					bool isSelected = enumInt == magic_enum::enum_integer(reg.bulletEmitters[selectedEmitterIndex].fireType);
+					bool isSelected = enumInt == magic_enum::enum_integer(sebec.fireType);
 					std::string label = enumName + "###" + std::to_string(enumInt); // Avoid label conflicts
 					if (ImGui::Selectable(label.c_str(), isSelected)) {
-						reg.bulletEmitters[selectedEmitterIndex].fireType = magic_enum::enum_value<FireTypes>(i);
+						sebec.fireType = magic_enum::enum_value<FireTypes>(i);
 					}
 				};
 				ImGui::EndCombo();
 			}
 		}
+		
 
 		ImGui::End();
 	}

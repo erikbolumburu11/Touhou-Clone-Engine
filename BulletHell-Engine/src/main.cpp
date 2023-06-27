@@ -5,27 +5,28 @@ int main() {
 	Game game(1270, 780);
 
 	// Create Test Player
-	Entity player = game.CreateEntity();
-	Registry& reg = game.GetRegistry();
-	reg.sprites[player] = SpriteComponent{ sf::Color::White, CIRCLE };
-	reg.transforms[player] = TransformComponent{ {0, 0}, {5, 5} };
-	reg.velocities[player] = VelocityComponent{ {0, 0} };
-	reg.playerMovements[player] = PlayerMovementComponent{ 300 };
+	entt::registry& reg = game.GetRegistry();
+	entt::entity player = reg.create();
+	reg.emplace<SpriteComponent>(player, sf::Color::White, CIRCLE);
+	reg.emplace<TransformComponent>(player, sf::Vector2f(0, 0), sf::Vector2f(5, 5) );
+	reg.emplace<VelocityComponent>(player, sf::Vector2f(0, 0) );
+	reg.emplace<PlayerMovementComponent>(player, (float)300, (float)150 );
 	
 	// Create Test Emitter
-	Entity emitter = game.CreateEntity();
-	reg.bulletEmitters[emitter] = BulletEmitterComponent{
-		0,
+	entt::entity emitter = reg.create();
+	reg.emplace<BulletEmitterComponent>(
+		emitter,
+		(uint32_t)0,
 		STRAIGHT_SHOT,
 		sf::Clock(),
-		3,
-		1,
-		0,
-		0
-	};
-	reg.transforms[emitter] = TransformComponent{ {0, -150 }, {20, 20} };
-	reg.sprites[emitter] = SpriteComponent{ sf::Color::White, RECTANGLE};
-	reg.names[emitter] = NameComponent{ "Test Emitter 1" };
+		(int)3,
+		(float)1,
+		(float)0,
+		(float)0
+	);
+	reg.emplace<TransformComponent>(emitter, sf::Vector2f(0, -150), sf::Vector2f(20, 20) );
+	reg.emplace<SpriteComponent>(emitter, sf::Color::White, RECTANGLE);
+	reg.emplace<NameComponent>(emitter, "Test Emitter 1");
 
 	game.Run();
 
