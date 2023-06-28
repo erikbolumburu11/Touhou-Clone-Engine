@@ -9,6 +9,7 @@ struct BulletState {
 	float speed = 300;
 	ImVec4 color = sf::Color::Red;
 	sf::Vector2f scale = { 10, 10 };
+	int drawLayer = 0;
 	float angularVelocity = 0;
 };
 

@@ -12,6 +12,7 @@ enum SpriteShapes {
 struct SpriteComponent {
 	sf::Color color;
 	SpriteShapes shape;
+	int drawLayer;
 };
 
 struct VelocityComponent {

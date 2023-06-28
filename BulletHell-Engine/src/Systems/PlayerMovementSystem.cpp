@@ -9,9 +9,12 @@ void PlayerMovementSystem::Update(entt::registry& reg)
 		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) speed = pmc.movementSpeed;
 		else speed = pmc.shiftMovementSpeed;
 		vc.velocity = { 0, 0 };
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) vc.velocity.y += speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) vc.velocity.y -= speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) vc.velocity.x += speed;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) vc.velocity.x -= speed;
+		sf::Vector2<float> v(0.f, 0.f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) v.y += 1.f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) v.y -= 1.f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) v.x += 1.f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) v.x -= 1.f;
+		if(v.x != 0.f || v.y != 0.f) v = v.normalized();
+		vc.velocity = v * speed;
 	});
 }

@@ -20,7 +20,8 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPat
 	reg.emplace<SpriteComponent>(
 		e,
 		bc.bullet.states[0].color,
-		CIRCLE
+		CIRCLE,
+		bc.bullet.states[0].drawLayer
 	);
 	reg.emplace<TransformComponent>(
 		e,

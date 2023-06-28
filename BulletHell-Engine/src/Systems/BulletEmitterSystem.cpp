@@ -38,6 +38,7 @@ void BulletEmitterSystem::Update(Game& game)
 void BulletEmitterSystem::StraightShot(Game& game, entt::registry& reg, AttackPattern& ap, entt::entity& e)
 {
 	sf::Vector2f dir(cos(ap.currentRotationRadians), sin(ap.currentRotationRadians));
+	dir = dir.rotatedBy(sf::degrees(90));
 	entt::entity b = game.GetBulletHandler().CreateBullet(game, e, ap, dir);
 }
 
