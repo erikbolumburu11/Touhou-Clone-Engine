@@ -81,6 +81,9 @@
     <ClCompile Include="src\Systems\BulletSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="src\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\Game.hpp">
@@ -133,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="src\include\Attack.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\ResourceManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\Menus\BulletSpriteSheetEditor.hpp">
+      <Filter>Header Files\Editor Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

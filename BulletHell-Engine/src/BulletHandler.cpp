@@ -19,14 +19,14 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPat
 
 	reg.emplace<SpriteComponent>(
 		e,
+		game.GetResourceManager().GetTexture(bc.bullet.states[0].texturePath),
 		bc.bullet.states[0].color,
-		CIRCLE,
 		bc.bullet.states[0].drawLayer
 	);
 	reg.emplace<TransformComponent>(
 		e,
-		bet.position - (bc.bullet.states[0].scale - (bet.scale / 2.f)),
-		bc.bullet.states[0].scale
+		bet.position + (bet.scale / 2.f),
+		sf::Vector2f(bc.bullet.states[0].scale, bc.bullet.states[0].scale)
 	);
 	reg.emplace<VelocityComponent>(
 		e,

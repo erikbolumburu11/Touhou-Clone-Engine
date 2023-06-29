@@ -3,14 +3,16 @@
 #include "Menus/BulletEditor.hpp"
 #include "Menus/EmitterEditor.hpp"
 #include "Menus/ViewportEditor.hpp"
+#include "Menus/BulletSpriteSheetEditor.hpp"
 #include <Game.hpp>
 
 EditorHandler::EditorHandler()
 {
-	editors.push_back(new EntityEditor());
+	//editors.push_back(new EntityEditor());
 	editors.push_back(new EmitterEditor());
 	editors.push_back(new ViewportEditor());
 	editors.push_back(new BulletEditor());
+	editors.push_back(new BulletSpriteSheetEditor());
 }
 
 void EditorHandler::Update(Game& game)
@@ -91,8 +93,6 @@ void EditorHandler::MainMenuBar(Game& game)
 				game.IsGamePaused() = !game.IsGamePaused();
 			}
 		}
-		std::string entityCount = "Entity Count: " + std::to_string(game.GetRegistry().storage<entt::entity>().size());
-		ImGui::Text(entityCount.c_str());
 
 		std::string fps = "FPS: " + std::to_string(1.0f / game.GetDeltaTime().asSeconds());
 		ImGui::Text(fps.c_str());

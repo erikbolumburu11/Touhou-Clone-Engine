@@ -3,12 +3,16 @@
 #include <imgui.h>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
+#include "ResourceManager.hpp"
 
 struct BulletState {
 	std::string name = "New State";
 	float speed = 300;
+	int textureIndex = 0;
 	ImVec4 color = sf::Color::Red;
-	sf::Vector2f scale = { 10, 10 };
+	std::string texturePath = "res/Bullets/SmallCircle.png";
+	float scale = 17;
+	
 	int drawLayer = 0;
 	float angularVelocity = 0;
 };

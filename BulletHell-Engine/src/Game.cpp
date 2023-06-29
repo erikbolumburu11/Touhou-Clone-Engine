@@ -12,6 +12,8 @@ Game::Game(unsigned int _windowWidth, unsigned int _windowHeight)
 	}
 	renderTarget = &window;
 
+	window.setFramerateLimit(120);
+
 	view = sf::View(sf::FloatRect(
 		{ 0.0f - _windowWidth / 2, 0.0f - _windowHeight / 2}, 
 		{(float)_windowWidth, (float)_windowHeight}
@@ -72,6 +74,8 @@ void Game::Run()
 
 void Game::Update()
 {
+	resourceManager.Update();
+
 	spriteSystem.Update(*this, registry);
 	transformSystem.Update(*this, registry);
 	playerMovementSystem.Update(registry);

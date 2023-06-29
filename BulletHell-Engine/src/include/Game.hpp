@@ -6,6 +6,7 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 #include <imgui-SFML.h>
+#include "ResourceManager.hpp"
 #include "Systems/SpriteSystem.hpp"
 #include "Systems/TransformSystem.hpp"
 #include "Systems/PlayerMovementSystem.hpp"
@@ -26,6 +27,7 @@ public:
 	sf::RenderWindow& GetWindow()			{ return window;					}
 	sf::RenderTexture& GetRenderTexture()	{ return renderTexture;				}
 	sf::RenderTarget* GetRenderTarget()		{ return renderTarget;				}
+	ResourceManager& GetResourceManager()	{ return resourceManager;			}		
 	sf::View& GetView()						{ return view;						}
 	sf::Event& GetEvent()					{ return event;						}
 	bool& IsRunning()						{ return isRunning;					}
@@ -42,6 +44,8 @@ private:
 	sf::RenderTarget* renderTarget;
 	sf::RenderTexture renderTexture;
 	sf::RenderWindow window;
+
+	ResourceManager resourceManager;
 
 	sf::View view;
 

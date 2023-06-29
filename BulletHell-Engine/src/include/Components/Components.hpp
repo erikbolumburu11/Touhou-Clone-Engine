@@ -4,14 +4,9 @@
 #include "FireTypes.hpp"
 #include <Attack.hpp>
 
-enum SpriteShapes {
-	CIRCLE,
-	RECTANGLE
-};
-
 struct SpriteComponent {
+	sf::Texture& texture;
 	sf::Color color;
-	SpriteShapes shape;
 	int drawLayer;
 };
 
