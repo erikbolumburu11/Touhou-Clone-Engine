@@ -9,6 +9,7 @@ void BulletSystem::Update(Game& game)
 		// Calculate Angular Velocity
 		float av = bc.bullet.states[bc.bullet.currentState].angularVelocity;
 		vc.velocity = vc.velocity.rotatedBy(sf::radians(av * game.GetDeltaTime().asSeconds()));
+		bc.angle = vc.velocity;
 
 		//Check If Off Screen
 		sf::View v = game.GetRenderTarget()->getView();

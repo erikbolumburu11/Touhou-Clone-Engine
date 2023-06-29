@@ -20,12 +20,22 @@ void SpriteSystem::Render(Game& g, entt::registry& reg)
 		quad.setPrimitiveType(sf::PrimitiveType::Triangles);
 		quad.resize(6);
 
+		//rotatedBy(sf::radians(atan2(bc.angle.y, bc.angle.x))
 		quad[0].position = sf::Vector2f(tc.position.x, tc.position.y);
 		quad[1].position = sf::Vector2f(tc.position.x + tc.scale.x, tc.position.y);
 		quad[2].position = sf::Vector2f(tc.position.x, tc.position.y + tc.scale.y);
 		quad[3].position = sf::Vector2f(tc.position.x, tc.position.y + tc.scale.y);
 		quad[4].position = sf::Vector2f(tc.position.x + tc.scale.x, tc.position.y);
 		quad[5].position = sf::Vector2f(tc.position.x + tc.scale.x, tc.position.y + tc.scale.y);
+
+		//Rotate
+		sf::Vector2f center = quad[0].position + (tc.scale / 2.f);
+		for (uint8_t i = 0; i < 6; i++)
+		{
+			sf::Vector2f diffVec = quad[i].position - center;
+			sf::Vector2f newVertPos = diffVec.rotatedBy(sf::radians(atan2(bc.angle.y, bc.angle.x)));
+			quad[i].position = newVertPos + center;
+		}
 
 		for (uint8_t i = 0; i < 6; i++)
 		{
