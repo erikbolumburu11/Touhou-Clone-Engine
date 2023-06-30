@@ -49,6 +49,10 @@ void Game::Run()
 				IsRunning() = false;
 			}
 
+			if (GetEvent().type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::C) GetBulletHandler().ClearBullets(*this);
+			}
+
 			#if (!EDIT_MODE)
 			if (GetEvent().type == sf::Event::Resized) {
 				view.setSize({ (float)GetWindow().getSize().x, (float)GetWindow().getSize().y});

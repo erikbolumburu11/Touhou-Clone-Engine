@@ -25,7 +25,7 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPat
 	);
 	reg.emplace<TransformComponent>(
 		e,
-		bet.position + (bet.scale / 2.f),
+		bet.position - (sf::Vector2f(bc.bullet.states[0].scale, bc.bullet.states[0].scale) / 2.f),
 		sf::Vector2f(bc.bullet.states[0].scale, bc.bullet.states[0].scale)
 	);
 	reg.emplace<VelocityComponent>(
@@ -33,5 +33,17 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPat
 		direction * bc.bullet.states[0].speed
 	);
 
+	game.bulletCount++;
+
 	return e;
+}
+
+void BulletHandler::ClearBullets(Game& game)
+{
+	auto view = game.GetRegistry().view<BulletComponent>();
+	view.each([&](BulletComponent& bc) {
+			entt::entity e = entt::to_entity(game.GetRegistry(), bc);
+			game.GetRegistry().destroy(e);
+	});
+	game.bulletCount = 0;
 }

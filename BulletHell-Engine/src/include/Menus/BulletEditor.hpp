@@ -46,7 +46,7 @@ class BulletEditor : public EditorBase {
 					ImGui::InputFloat("Speed", &bh.bullets[bulletEditIndex].states[i].speed);
 					ImGui::ColorEdit4("Color", (float*)&bh.bullets[bulletEditIndex].states[i].color);
 					ImGui::InputInt("Texture Index", &bh.bullets[bulletEditIndex].states[i].textureIndex);
-					ImGui::InputInt("Draw Layer", &bh.bullets[bulletEditIndex].states[i].drawLayer);
+					//ImGui::InputInt("Draw Layer", &bh.bullets[bulletEditIndex].states[i].drawLayer);
 					ImGui::DragFloat("Scale", &bh.bullets[bulletEditIndex].states[i].scale, 0.2f, 1, 100);
 					ImGui::DragFloat("Angular Velocity", &bh.bullets[bulletEditIndex].states[i].angularVelocity, 0.001f, -2, 2);
 					ImGui::TreePop();

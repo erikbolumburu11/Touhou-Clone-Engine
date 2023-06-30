@@ -12,6 +12,8 @@ struct BulletHandler {
 
 	entt::entity CreateBullet(Game& game, entt::entity& be, AttackPattern& ap, sf::Vector2f direction);
 
+	void ClearBullets(Game& game);
+
 	BulletHandler() {
 		bullets.push_back(BulletData());
 	}

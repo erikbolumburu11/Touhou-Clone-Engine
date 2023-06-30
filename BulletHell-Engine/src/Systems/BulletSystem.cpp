@@ -23,6 +23,7 @@ void BulletSystem::Update(Game& game)
 		if (!(bool)bounds.findIntersection(cullRect)) {
 			entt::entity e = entt::to_entity(game.GetRegistry(), bc);
 			game.GetRegistry().destroy(e);
+			game.bulletCount--;
 		}
 	});
 }

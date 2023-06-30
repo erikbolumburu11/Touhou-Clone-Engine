@@ -37,6 +37,8 @@ public:
 	EditorHandler& GetEditorHandler()		{ return editorHandler;				}
 	BulletHandler& GetBulletHandler()		{ return bulletHandler;				}
 
+	int bulletCount = 0;
+
 private:
 	std::size_t windowWidth;
 	std::size_t windowHeight;

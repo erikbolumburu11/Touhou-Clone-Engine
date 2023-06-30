@@ -44,16 +44,13 @@ void BulletEmitterSystem::StraightShot(Game& game, entt::registry& reg, AttackPa
 
 void BulletEmitterSystem::RadialShot(Game& game, entt::registry& reg, AttackPattern& ap, entt::entity& e)
 {
-	for (uint16_t i = 0; i < ap.bulletsFired; i++)
+	float step = 2 * M_PI / ap.bulletsFired;
+	for (uint32_t i = 0; i < ap.bulletsFired; i++)
 	{
-		float step = 2 * M_PI / ap.bulletsFired;
-		for (uint32_t i = 0; i < ap.bulletsFired; i++)
-		{
-			sf::Vector2f dir(cos((step * i)), sin(step * i));
-			dir = dir.normalized();
-			dir = dir.rotatedBy(sf::radians(ap.currentRotationRadians));
-			entt::entity b = game.GetBulletHandler().CreateBullet(game, e, ap, dir);
-		}
+		sf::Vector2f dir(cos((step * i)), sin(step * i));
+		dir = dir.normalized();
+		dir = dir.rotatedBy(sf::radians(ap.currentRotationRadians));
+		entt::entity b = game.GetBulletHandler().CreateBullet(game, e, ap, dir);
 	}
 }
 

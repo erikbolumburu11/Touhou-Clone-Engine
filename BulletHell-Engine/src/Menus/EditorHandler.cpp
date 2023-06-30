@@ -94,6 +94,9 @@ void EditorHandler::MainMenuBar(Game& game)
 			}
 		}
 
+		std::string bulletCount = "Bullets: " + std::to_string(game.bulletCount);
+		ImGui::Text(bulletCount.c_str());
+
 		std::string fps = "FPS: " + std::to_string(1.0f / game.GetDeltaTime().asSeconds());
 		ImGui::Text(fps.c_str());
 
