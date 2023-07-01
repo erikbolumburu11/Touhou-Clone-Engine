@@ -7,7 +7,8 @@ void BulletSystem::Update(Game& game)
 	auto view = game.GetRegistry().view<BulletComponent, VelocityComponent, TransformComponent>();
 	view.each([&](auto& bc, auto& vc, auto& tc) {
 		// Calculate Angular Velocity
-		float av = bc.bullet.states[bc.bullet.currentState].angularVelocity;
+		BulletData& bd = game.GetBulletHandler().bullets[bc.bulletDataIndex];
+		float av = bd.states[bd.currentState].angularVelocity;
 		vc.velocity = vc.velocity.rotatedBy(sf::radians(av * game.GetDeltaTime().asSeconds()));
 		bc.angle = vc.velocity;
 

@@ -144,4 +144,9 @@
       <Filter>Header Files\Editor Menus</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="gfx\BulletColor.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

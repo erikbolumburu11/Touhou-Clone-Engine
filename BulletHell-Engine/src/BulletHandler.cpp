@@ -6,31 +6,33 @@ entt::entity BulletHandler::CreateBullet(Game& game, entt::entity& be, AttackPat
 	entt::registry& reg = game.GetRegistry();
 	entt::entity e = reg.create();
 
-	BulletEmitterComponent bec = reg.get<BulletEmitterComponent>(be);
-	TransformComponent bet = reg.get<TransformComponent>(be);
+	BulletEmitterComponent& bec = reg.get<BulletEmitterComponent>(be);
+	TransformComponent& bet = reg.get<TransformComponent>(be);
+
+	BulletData& bd = bullets[ap.bulletDataIndex];
 
 	reg.emplace<BulletComponent>( 
 		e,
-		game.GetBulletHandler().bullets[ap.bulletDataIndex],
+		ap.bulletDataIndex,
 		direction
 	);
 
-	BulletComponent bc = reg.get<BulletComponent>(e);
+	BulletComponent& bc = reg.get<BulletComponent>(e);
 
 	reg.emplace<SpriteComponent>(
 		e,
-		game.GetResourceManager().GetTexture(bc.bullet.states[0].texturePath),
-		bc.bullet.states[0].color,
-		bc.bullet.states[0].drawLayer
+		nullptr,
+		bd.states[0].color,
+		bd.states[0].drawLayer
 	);
 	reg.emplace<TransformComponent>(
 		e,
-		bet.position - (sf::Vector2f(bc.bullet.states[0].scale, bc.bullet.states[0].scale) / 2.f),
-		sf::Vector2f(bc.bullet.states[0].scale, bc.bullet.states[0].scale)
+		bet.position - (sf::Vector2f(bd.states[0].scale, bd.states[0].scale) / 2.f),
+		sf::Vector2f(bd.states[0].scale, bd.states[0].scale)
 	);
 	reg.emplace<VelocityComponent>(
 		e,
-		direction * bc.bullet.states[0].speed
+		direction * bd.states[0].speed
 	);
 
 	game.bulletCount++;

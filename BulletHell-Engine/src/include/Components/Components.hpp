@@ -5,7 +5,7 @@
 #include <Attack.hpp>
 
 struct SpriteComponent {
-	sf::Texture& texture;
+	sf::Texture* texture;
 	sf::Color color;
 	int drawLayer;
 };
@@ -34,7 +34,7 @@ struct BulletEmitterComponent {
 };
 
 struct BulletComponent {
-	BulletData bullet;
+	uint16_t bulletDataIndex;
 	sf::Vector2f angle;
 };
 

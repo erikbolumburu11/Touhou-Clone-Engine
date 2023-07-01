@@ -14,7 +14,7 @@ struct BulletHandler {
 
 	void ClearBullets(Game& game);
 
-	BulletHandler() {
-		bullets.push_back(BulletData());
+	BulletHandler(ResourceManager& rm) {
+		bullets.push_back(BulletData(rm));
 	}
 };

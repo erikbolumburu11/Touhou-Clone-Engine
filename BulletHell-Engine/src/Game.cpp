@@ -4,7 +4,7 @@
 #include <Menus/EntityEditor.hpp>
 
 Game::Game(unsigned int _windowWidth, unsigned int _windowHeight) 
-	: windowWidth(_windowWidth), windowHeight(_windowHeight), event(sf::Event()) {
+	: windowWidth(_windowWidth), windowHeight(_windowHeight), event(sf::Event()), bulletHandler(BulletHandler(resourceManager)){
 
 	window.create(sf::VideoMode({ _windowWidth, _windowHeight }, (unsigned int)32), "Bullet Hell Engine");
 	if (!renderTexture.create({ _windowWidth, _windowHeight })) {
@@ -18,6 +18,7 @@ Game::Game(unsigned int _windowWidth, unsigned int _windowHeight)
 		{ 0.0f - _windowWidth / 2, 0.0f - _windowHeight / 2}, 
 		{(float)_windowWidth, (float)_windowHeight}
 	));
+
 
 	GetEditorHandler() = EditorHandler();
 
@@ -60,6 +61,7 @@ void Game::Run()
 			#endif
 		}
 
+		view.zoom(0.7);
 		GetWindow().setView(view);
 
 		deltaTime = deltaClock.restart();

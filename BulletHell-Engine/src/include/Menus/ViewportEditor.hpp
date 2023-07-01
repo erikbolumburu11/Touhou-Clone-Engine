@@ -11,6 +11,7 @@ public:
 		if (ImGui::Begin("Viewport")){
 			ImVec2 contentSize = ImGui::GetContentRegionAvail();
 			game.GetView().setSize({contentSize.x, contentSize.y});
+			game.GetView().zoom(0.6);
 			game.GetRenderTexture().setView(game.GetView());
 
 			ImGui::Image(game.GetRenderTexture(), contentSize);

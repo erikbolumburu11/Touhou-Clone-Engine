@@ -5,7 +5,7 @@
 
 class Game;
 struct AttackPattern {
-	uint32_t bulletDataIndex;
+	uint16_t bulletDataIndex;
 	FireTypes fireType;
 	sf::Clock timeSinceShot;
 	int bulletsFired;

@@ -18,16 +18,25 @@ public:
 
 	void Update();
 
-	sf::Texture& GetTexture(std::string filePath);
+	sf::Texture* GetTexture(std::string filePath);
 
-	void BulletMapDraw(sf::Texture& tex, int index);
+	void BulletMapDraw(sf::Texture* tex, int index);
 	void BulletMapDraw(std::string texPath, int index);
 
 	sf::RenderTexture* GetBulletTextureMap() { return &bulletTextureMap; }
+
+	///////////////////
+	///// Shaders /////
+	///////////////////
+	sf::Shader bulletColorShader;
 	
 	ResourceManager() {
 		if (!bulletTextureMap.create(sf::Vector2u(BULLET_SPRITE_MAX_COUNT * BULLET_SPRITE_SCALE_PX, BULLET_SPRITE_SCALE_PX))) {
 			std::cout << "Failed to create bullet sprite map\n";
+		}
+	
+		if (!bulletColorShader.loadFromFile("gfx/BulletColor.frag", sf::Shader::Fragment)) {
+			std::cout << "Failed To Load Bullet Color Shader\n";
 		}
 	}
 };

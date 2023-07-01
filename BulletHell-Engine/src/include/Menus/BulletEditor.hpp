@@ -4,6 +4,7 @@
 #include <imgui.h>
 #include <imgui_stdlib.h>
 #include <imgui-SFML.h>
+#include <portable-file-dialogs.h>
 #include <Menus/EditorBase.hpp>
 #include "Game.hpp"
 
@@ -18,7 +19,7 @@ class BulletEditor : public EditorBase {
 		BulletHandler& bh = game.GetBulletHandler();
 
 		if (ImGui::Button("Create New Bullet Data")) {
-			BulletData bd = BulletData();
+			BulletData bd = BulletData(game.GetResourceManager());
 			bh.bullets.push_back(bd);
 
 			bulletEditIndex = bh.bullets.size() - 1;
@@ -45,8 +46,12 @@ class BulletEditor : public EditorBase {
 				if (ImGui::TreeNode(label.c_str())) {
 					ImGui::InputFloat("Speed", &bh.bullets[bulletEditIndex].states[i].speed);
 					ImGui::ColorEdit4("Color", (float*)&bh.bullets[bulletEditIndex].states[i].color);
-					ImGui::InputInt("Texture Index", &bh.bullets[bulletEditIndex].states[i].textureIndex);
-					//ImGui::InputInt("Draw Layer", &bh.bullets[bulletEditIndex].states[i].drawLayer);
+					if (ImGui::ImageButton(*bh.bullets[bulletEditIndex].states[i].texture)) {
+						auto selected = pfd::open_file::open_file("Select Bullet Sprite").result();
+						if (!selected.empty()) {
+							bh.bullets[bulletEditIndex].states[i].texture = game.GetResourceManager().GetTexture(selected[0]);
+						}
+					}
 					ImGui::DragFloat("Scale", &bh.bullets[bulletEditIndex].states[i].scale, 0.2f, 1, 100);
 					ImGui::DragFloat("Angular Velocity", &bh.bullets[bulletEditIndex].states[i].angularVelocity, 0.001f, -2, 2);
 					ImGui::TreePop();
