@@ -1,6 +1,8 @@
 # Bullet Hell Engine
 [Video](https://www.youtube.com/watch?v=hGOyKBPtKBg)
 
+Using shaders and batch rendering, I designed and programmed a game engine targeted at creating games inspired by ‘Touhou’ that supports tens of thousands of bullets on screen.
+
 ### Libraries/Tools Used
 - SFML
 - Visual Studio
