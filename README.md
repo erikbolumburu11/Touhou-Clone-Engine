@@ -6,6 +6,7 @@ Using shaders and batch rendering, I designed and programmed a game engine targe
 ### Libraries/Tools Used
 - SFML
 - Visual Studio
+- ImGui
 - Git
 
 ## Screenshot
