@@ -1,7 +1,7 @@
 # Touhou Clone Engine
 [Video](https://www.youtube.com/watch?v=hGOyKBPtKBg)
 
-Using shaders and batch rendering, I designed and programmed a game engine targeted at creating games inspired by ‘Touhou’ that supports tens of thousands of bullets on screen.
+I designed and programmed a game engine targeted at creating games inspired by ‘Touhou’ that supports tens of thousands of bullets on screen. It utilizes batch rendering techniques to maintain high performance.
 
 ### Libraries/Tools Used
 - SFML
